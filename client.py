@@ -90,9 +90,11 @@ def main():
         if data["msg_type"] == "start":
             print("[client] Received start learning message")
             #local_model.fit(local_x_train, local_y_train, epochs=local_epochs, verbose=1, batch_size=local_batch_size)
-            for epoch in range(local_epochs):
+            for epoch in range(0, local_epochs):
+                print("에폭:"+str(epoch))
                 batch_count = len(local_x_train) // local_batch_size
-                for i in range(batch_count):
+                for i in range(0, batch_count):
+                    #print("배치:"+str(i)+" "+str(batch_count))
                     x_batch = local_x_train[i * local_batch_size:(i + 1) * local_batch_size]
                     y_batch = local_y_train[i * local_batch_size:(i + 1) * local_batch_size]
                     
@@ -137,7 +139,7 @@ def main():
             print("[client] Success learning")
             
             
-            x_test = np.arange(-5,5,0.01)
+            x_test = np.arange(-2,2,0.01)
             y_test = x_test**2
             result_y = local_model.predict(x_test)
             plt.plot(x_test,y_test,'b')

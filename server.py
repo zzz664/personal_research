@@ -57,7 +57,7 @@ def main():
     local_weights_list = []
     
     #임시 훈련데이터
-    x_train = np.arange(-5,5,0.01)
+    x_train = np.arange(-1,1,0.01)
     y_train = x_train**2
     
     #epoch, batch_size
@@ -138,7 +138,7 @@ def main():
                     if data["client_msg"] == "ack(success learning)":
                         comp_learning.append(True)
                     if data["client_msg"] == "ack(share gradients)":
-                        print(f"[server] Received {data['client_msg']}")
+                        #print(f"[server] Received {data['client_msg']}")
                         local_grads_list.append(data["grads"])
                 if all(comp_learning):
                     break
@@ -232,7 +232,7 @@ def main():
                 print(f"[server] Received: {data}")
                 
         if user_input == '3':
-            x_test = np.arange(-5,5,0.01)
+            x_test = np.arange(-2,2,0.01)
             y_test = x_test**2
             result_y = global_model.predict(x_test)
             plt.plot(x_test,y_test,'b')
